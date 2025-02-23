@@ -1,0 +1,24 @@
+2025-02-22 18:25:47 [INFO] Starting proxy server on port 12345
+2025-02-22 19:08:56 [INFO] Starting proxy server on port 12345
+2025-02-22 19:08:56 [INFO] Stopping proxy server
+2025-02-22 19:09:03 [INFO] Starting proxy server on port 12345
+2025-02-22 19:13:02 [INFO] Starting proxy server on port 12345
+2025-02-22 19:13:04 [ERROR] Forward request error: Could not resolve host
+2025-02-22 19:13:40 [INFO] Starting proxy server on port 12345
+2025-02-22 19:13:45 [ERROR] Forward request error: Could not resolve host
+2025-02-22 19:14:08 [ERROR] Forward request error: Could not resolve host
+2025-02-22 19:17:32 [INFO] Starting proxy server on port 12345
+2025-02-22 19:17:36 [INFO] Connecting to host: example.com for path: /
+2025-02-22 19:17:36 [ERROR] Forward request error: Could not resolve host: example.com
+2025-02-22 19:26:08 [INFO] Starting proxy server on port 12345
+2025-02-22 19:26:12 [INFO] Resolving host: example.com
+2025-02-22 19:26:12 [ERROR] Forward request error: Failed to resolve host: nodename nor servname provided, or not known
+2025-02-22 19:27:49 [INFO] Starting proxy server on port 12345
+2025-02-22 19:27:55 [INFO] Resolving host: baidu.com
+2025-02-22 19:27:55 [ERROR] Forward request error: Failed to resolve host: nodename nor servname provided, or not known
+2025-02-22 20:56:25 [INFO] Starting proxy server on port 12345
+2025-02-22 20:57:26 [INFO] Starting proxy server on port 12345
+2025-02-22 20:59:48 [INFO] Starting proxy server on port 12345
+2025-02-22 21:06:32 [INFO] Starting proxy server on port 12345
+2025-02-22 21:11:17 [INFO] Starting proxy server on port 12345
+2025-02-22 21:13:27 [INFO] Starting proxy server on port 12345
