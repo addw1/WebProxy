@@ -56,8 +56,7 @@ bool HttpParser::isValidRequest(const HttpRequest& request) {
     
     // Validate method
     if (request.method != "GET" && request.method != "POST" && 
-        request.method != "PUT" && request.method != "DELETE" && 
-        request.method != "HEAD") {
+        request.method != "CONNECT") {
         return false;
     }
     

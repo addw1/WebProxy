@@ -5,160 +5,261 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
 
 class ProxyClient {
 private:
-    int clientSocket;
-    const char* proxyHost;
-    int proxyPort;
-    static const int BUFFER_SIZE = 4096;
+    std::string host;
+    int port;
+    int sock;
 
 public:
-    ProxyClient(const char* host, int port) : proxyHost(host), proxyPort(port) {
-        // Create the client socket
-        clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-        if (clientSocket < 0) {
-            throw std::runtime_error("Failed to create socket");
-        }
-    }
-
-    ~ProxyClient() {
-        if (clientSocket >= 0) {
-            close(clientSocket);
-        }
-    }
-
+    ProxyClient(const std::string& host, int port) : host(host), port(port), sock(-1) {}
+    
     bool connect() {
-        struct sockaddr_in proxyAddr;
-        proxyAddr.sin_family = AF_INET;
-        proxyAddr.sin_port = htons(proxyPort);
-        
-        if (inet_pton(AF_INET, proxyHost, &proxyAddr.sin_addr) <= 0) {
-            std::cerr << "Invalid address" << std::endl;
-            return false;
-        }
+        sock = socket(AF_INET, SOCK_STREAM, 0);
+        if (sock < 0) return false;
 
-        if (::connect(clientSocket, (struct sockaddr*)&proxyAddr, sizeof(proxyAddr)) < 0) {
-            std::cerr << "Connection failed" << std::endl;
-            return false;
-        }
+        struct sockaddr_in addr;
+        addr.sin_family = AF_INET;
+        addr.sin_port = htons(port);
+        addr.sin_addr.s_addr = inet_addr(host.c_str());
 
-        return true;
+        return ::connect(sock, (struct sockaddr*)&addr, sizeof(addr)) >= 0;
     }
 
     bool sendRequest(const std::string& request) {
-        if (send(clientSocket, request.c_str(), request.length(), 0) < 0) {
-            std::cerr << "Failed to send request" << std::endl;
-            return false;
-        }
-        return true;
+        return send(sock, request.c_str(), request.length(), 0) > 0;
     }
-
     std::string receiveResponse() {
-        char buffer[BUFFER_SIZE];
         std::string response;
-        ssize_t bytesRead;
-        // Loop until get the response
-        while ((bytesRead = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0)) > 0) {
-            buffer[bytesRead] = '\0';
+        char buffer[4096];
+        int bytesRead;
+
+        // The while loop continues as long as recv() returns > 0 bytes read
+        // If the server closes the connection normally, recv() will return 0
+        // If there's an error, recv() will return -1
+        // So we need to check for both cases to avoid infinite loop
+        while ((bytesRead = recv(sock, buffer, sizeof(buffer) - 1, 0)) > 0) {
+            buffer[bytesRead] = '\0';  // Null terminate the received data
             response += buffer;
             
-            // Simple check for HTTP response completion
+            // Check if we've received the end of the HTTP response
+            // Most HTTP responses end with \r\n\r\n
             if (response.find("\r\n\r\n") != std::string::npos) {
                 break;
             }
         }
 
+        if (bytesRead == 0) {
+            // Connection closed by peer
+            return response;
+        }
+        else if (bytesRead < 0) {
+            // Error occurred
+            return "";
+        }
+
         return response;
+    }
+
+    bool establishSSLTunnel(const std::string& host, int port) {
+        // Create connect request
+        std::string connect_request = 
+            "CONNECT " + host + ":" + std::to_string(port) + " HTTP/1.1\r\n"
+            "Host: " + host + ":" + std::to_string(port) + "\r\n"
+            "Proxy-Connection: Keep-Alive\r\n\r\n";
+        // Send request to the server
+        if (!sendRequest(connect_request)) {
+            return false;
+        }
+        
+        std::string response = receiveResponse();
+        // std::cout << response << std::endl;
+        return response.find("200 Connection Established") != std::string::npos;
+    }
+
+    int getSocket() const {
+        return sock;
+    }
+
+    ~ProxyClient() {
+        if (sock >= 0) {
+            close(sock);
+        }
     }
 };
 
-// Test functions
-void testBasicRequest() {
-    std::cout << "\n=== Testing Basic HTTP Request ===" << std::endl;
+// Test GET request
+void testHttpGet() {
+    std::cout << "\n=== Testing HTTP GET Request ===" << std::endl;
     try {
         ProxyClient client("127.0.0.1", 12345);
-        // Connect with the web proxy
+        
         if (!client.connect()) {
             std::cout << "Failed to connect to proxy server" << std::endl;
             return;
         }
 
-        // Create a simple HTTP request
+        // Test with a non-HTTPS website that accepts GET requests
         std::string request = 
-        "GET http://google.com/ HTTP/1.1\r\n"
-        "Host: google.com\r\n"
-        "Connection: close\r\n"
-        "\r\n";
-        
+            "GET http://httpbin.org/get HTTP/1.1\r\n"
+            "Host: httpbin.org\r\n"
+            "Connection: close\r\n"
+            "\r\n";
 
         if (!client.sendRequest(request)) {
-            std::cout << "Failed to send request" << std::endl;
+            std::cout << "Failed to send GET request" << std::endl;
             return;
         }
 
         std::string response = client.receiveResponse();
-        std::cout << "Response received:\n" << response << std::endl;
+        std::cout << "GET Response:\n" << response << std::endl;
+        
+        // Verify response
+        if (response.find("200 OK") != std::string::npos) {
+            std::cout << "GET test passed!" << std::endl;
+        } else {
+            std::cout << "GET test failed!" << std::endl;
+        }
         
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error in GET test: " << e.what() << std::endl;
     }
 }
 
-void testMultipleRequests() {
-    std::cout << "\n=== Testing Multiple Sequential Requests ===" << std::endl;
+// Test POST request
+void testHttpPost() {
+    std::cout << "\n=== Testing HTTP POST Request ===" << std::endl;
     try {
-        for (int i = 0; i < 3; i++) {
-            ProxyClient client("127.0.0.1", 8080);
-            
-            if (!client.connect()) {
-                std::cout << "Failed to connect to proxy server" << std::endl;
-                continue;
-            }
-
-            std::string request = 
-                "GET http://example.com/ HTTP/1.1\r\n"
-                "Host: example.com\r\n"
-                "Connection: close\r\n"
-                "\r\n";
-
-            if (!client.sendRequest(request)) {
-                std::cout << "Failed to send request" << std::endl;
-                continue;
-            }
-
-            std::string response = client.receiveResponse();
-            std::cout << "Request " << (i + 1) << " response length: " 
-                     << response.length() << " bytes" << std::endl;
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-}
-
-void testInvalidRequest() {
-    std::cout << "\n=== Testing Invalid Request ===" << std::endl;
-    try {
-        ProxyClient client("127.0.0.1", 8080);
+        ProxyClient client("127.0.0.1", 12345);
         
         if (!client.connect()) {
             std::cout << "Failed to connect to proxy server" << std::endl;
             return;
         }
 
-        // Send an invalid request
-        std::string request = "INVALID REQUEST\r\n\r\n";
+        // Create POST data
+        std::string postData = "test_data=Hello+World";
+        
+        std::string request = 
+            "POST http://httpbin.org/post HTTP/1.1\r\n"
+            "Host: httpbin.org\r\n"
+            "Content-Type: application/x-www-form-urlencoded\r\n"
+            "Content-Length: " + std::to_string(postData.length()) + "\r\n"
+            "Connection: close\r\n"
+            "\r\n" +
+            postData;
 
         if (!client.sendRequest(request)) {
-            std::cout << "Failed to send request" << std::endl;
+            std::cout << "Failed to send POST request" << std::endl;
             return;
         }
 
         std::string response = client.receiveResponse();
-        std::cout << "Response to invalid request:\n" << response << std::endl;
+        std::cout << "POST Response:\n" << response << std::endl;
+        
+        // Verify response
+        if (response.find("200 OK") != std::string::npos && 
+            response.find("test_data") != std::string::npos) {
+            std::cout << "POST test passed!" << std::endl;
+        } else {
+            std::cout << "POST test failed!" << std::endl;
+        }
         
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error in POST test: " << e.what() << std::endl;
+    }
+}
+
+// Test CONNECT method (HTTPS)
+void testHttpsConnect() {
+    std::cout << "\n=== Testing HTTPS CONNECT Method ===" << std::endl;
+    try {
+        // create proxy client
+        ProxyClient client("127.0.0.1", 12345);
+        if (!client.connect()) {
+            std::cout << "Failed to connect to proxy server" << std::endl;
+            return;
+        }
+
+        const std::string host = "www.google.com";
+        const int port = 443;
+
+        if (!client.establishSSLTunnel(host, port)) {
+            std::cout << "Failed to establish SSL tunnel" << std::endl;
+            return;
+        }
+
+        // Initialize OpenSSL
+        SSL_library_init();
+        SSL_CTX* ctx = SSL_CTX_new(TLS_client_method());
+        if (!ctx) {
+            std::cout << "Failed to create SSL context" << std::endl;
+            return;
+        }
+
+        // Create SSL connection
+        SSL* ssl = SSL_new(ctx);
+        SSL_set_fd(ssl, client.getSocket());
+        
+        // Perform SSL handshake
+        if (SSL_connect(ssl) <= 0) {
+            std::cout << "Failed SSL handshake" << std::endl;
+            SSL_free(ssl);
+            SSL_CTX_free(ctx);
+            return;
+        }
+
+        // Send HTTPS request
+        std::string request = 
+            "GET / HTTP/1.1\r\n"
+            "Host: " + host + "\r\n"
+            "Connection: close\r\n\r\n";
+
+        SSL_write(ssl, request.c_str(), request.length());
+
+        // Receive response
+        char buffer[4096];
+        std::string response;
+        int bytes;
+        while ((bytes = SSL_read(ssl, buffer, sizeof(buffer) - 1)) > 0) {
+            buffer[bytes] = '\0';
+            response += buffer;
+        }
+
+        std::cout << "HTTPS Response:\n" << response << std::endl;
+
+        // Clean up
+        SSL_free(ssl);
+        SSL_CTX_free(ctx);
+        
+    } catch (const std::exception& e) {
+        std::cerr << "Error in CONNECT test: " << e.what() << std::endl;
+    }
+}
+
+// Test real-world scenario (Google Search)
+void testGoogleSearch() {
+    std::cout << "\n=== Testing Google Search (HTTPS) ===" << std::endl;
+    try {
+        ProxyClient client("127.0.0.1", 12345);
+        
+        if (!client.connect()) {
+            std::cout << "Failed to connect to proxy server" << std::endl;
+            return;
+        }
+
+        if (!client.establishSSLTunnel("www.google.com", 443)) {
+            std::cout << "Failed to establish SSL tunnel to Google" << std::endl;
+            return;
+        }
+
+        std::cout << "Successfully established HTTPS connection to Google!" << std::endl;
+        
+    } catch (const std::exception& e) {
+        std::cerr << "Error in Google Search test: " << e.what() << std::endl;
     }
 }
 
@@ -166,9 +267,10 @@ int main() {
     std::cout << "Starting proxy client tests..." << std::endl;
 
     // Run tests
-    testBasicRequest();
-    // testMultipleRequests();
-    // testInvalidRequest();
+    testHttpGet();
+    testHttpPost();
+    testHttpsConnect();
+    testGoogleSearch();
 
     return 0;
-} 
+}

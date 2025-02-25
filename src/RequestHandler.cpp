@@ -7,12 +7,13 @@
 #include <cstring>
 #include <netdb.h>
 #include <unistd.h>
+#include "MessageForwarder.h"
 
 
 RequestHandler::RequestHandler(std::shared_ptr<CacheManager> cache, std::shared_ptr<Logger> logger)
     : cacheManager(cache), logger(logger), httpParser(std::make_unique<HttpParser>()) {}
 
-std::string RequestHandler::handleRequest(const std::string& request) {
+std::string RequestHandler::handleRequest(const std::string& request, int clientSocket) {
     try {
         // Parse the http request
         HttpRequest parsedRequest = httpParser->parseRequest(request);
@@ -31,9 +32,11 @@ std::string RequestHandler::handleRequest(const std::string& request) {
             return cachedResponse;
         }
         */
-        std::string response = forwardRequest(parsedRequest, request);
+        std::string response = forwardRequest(parsedRequest, clientSocket);
+        logger->log(Logger::INFO, response);
         // TODO: test cache later 
         // cacheManager->put(cacheKey, response, time(nullptr) + 300); // Cache for 5 minutes
+        std::cout << response << std::endl;
         return response;
     } catch (const std::exception& e) {
         logger->log(Logger::ERROR, std::string("Error handling request: ") + e.what());
@@ -41,58 +44,19 @@ std::string RequestHandler::handleRequest(const std::string& request) {
     }
 }
 
-std::string RequestHandler::forwardRequest(HttpRequest httpRequest, const std::string& request) {
+std::string RequestHandler::forwardRequest(HttpRequest httpRequest, int clientSocket) {
     try {
-        std::string host = httpRequest.headers.at("Host");
-        
-        // Trim whitespace from both ends
-        host.erase(0, host.find_first_not_of(" \t\r\n")); // Leading whitespace
-        host.erase(host.find_last_not_of(" \t\r\n") + 1); // Trailing whitespace
-        
-        std::cout << "Host string length: " << host.length() << ", content: '" << host << "'" << std::endl;
-
-        int sock = socket(AF_INET, SOCK_STREAM, 0);
-        if (sock < 0) throw std::runtime_error("Failed to create socket");
-
-        struct addrinfo hints{}, *result;
-        memset(&hints, 0, sizeof(hints));
-        hints.ai_family = AF_INET;
-        hints.ai_socktype = SOCK_STREAM;
-
-        int status = getaddrinfo(host.c_str(), "80", &hints, &result);
-        if (status != 0) {
-            close(sock);
-            std::cout << "Host: " << host << " - Error: " << gai_strerror(status) << std::endl;
-            throw std::runtime_error("Host not found");
-        }
-
-        if (connect(sock, result->ai_addr, result->ai_addrlen) < 0) {
-            freeaddrinfo(result);
-            close(sock);
-            throw std::runtime_error("Connection failed");
-        }
-
-        freeaddrinfo(result);
-
-        ssize_t sent = send(sock, request.c_str(), request.length(), 0);
-        if (sent < 0) {
-            close(sock);
-            throw std::runtime_error("Failed to send request");
-        }
-
-        std::string response;
-        char buffer[4096];
-        while (true) {
-            int bytesReceived = recv(sock, buffer, sizeof(buffer) - 1, 0);
-            if (bytesReceived <= 0) break;
-            buffer[bytesReceived] = '\0';
-            response += buffer;
-        }
-
-        close(sock);
-        return response;
-    }
-    catch (const std::exception& e) {
-        return std::string("Error: ") + e.what();
+            MessageForwarder forwarder;
+            if (httpRequest.method == "GET") {
+                return forwarder.forwardGet(httpRequest);
+            } else if (httpRequest.method == "POST") {
+                return forwarder.forwardPost(httpRequest);
+            } else if (httpRequest.method == "CONNECT") {
+                return forwarder.forwardConnect(httpRequest, clientSocket);
+            } else {
+                return "Error: Unsupported method";
+            }
+        } catch (const std::exception& e) {
+            return std::string("Error: ") + e.what();
     }
 }

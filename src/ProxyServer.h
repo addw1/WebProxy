@@ -12,7 +12,6 @@ private:
     std::unique_ptr<ConnectionHandler> connectionHandler;
     std::shared_ptr<CacheManager> cacheManager;
     std::shared_ptr<Logger> logger;
-    void handleClient(int clientSocket);
 
 public:
     ProxyServer(int port = 8080);

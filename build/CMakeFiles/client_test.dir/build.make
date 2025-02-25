@@ -95,6 +95,8 @@ client_test_EXTERNAL_OBJECTS =
 
 client_test: CMakeFiles/client_test.dir/test/client_test.cpp.o
 client_test: CMakeFiles/client_test.dir/build.make
+client_test: /opt/homebrew/lib/libssl.dylib
+client_test: /opt/homebrew/lib/libcrypto.dylib
 client_test: CMakeFiles/client_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable client_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client_test.dir/link.txt --verbose=$(VERBOSE)

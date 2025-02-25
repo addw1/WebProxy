@@ -3,6 +3,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <stdexcept>
+#include <iostream>
 
 ConnectionHandler::ConnectionHandler(std::shared_ptr<RequestHandler> handler, std::shared_ptr<Logger> logger)
     : requestHandler(handler), logger(logger), serverSocket(-1) {}
@@ -57,7 +58,7 @@ void ConnectionHandler::handleClient(int clientSocket) {
         // Convert the C style string to the C++ style
         std::string request(buffer);
         // Get the response 
-        std::string response = requestHandler->handleRequest(request);
+        std::string response = requestHandler->handleRequest(request, clientSocket);
         // Send to the server
         send(clientSocket, response.c_str(), response.length(), 0);
     }

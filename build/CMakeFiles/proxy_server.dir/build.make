@@ -142,10 +142,24 @@ CMakeFiles/proxy_server.dir/src/Logger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/Logger.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/Logger.cpp -o CMakeFiles/proxy_server.dir/src/Logger.cpp.s
 
+CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: CMakeFiles/proxy_server.dir/flags.make
+CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp
+CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o -MF CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o.d -o CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp
+
+CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp > CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i
+
+CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp -o CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s
+
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o -MF CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o.d -o CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp
 
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.i: cmake_force
@@ -159,7 +173,7 @@ CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.s: cmake_force
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o -MF CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o.d -o CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp
 
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.i: cmake_force
@@ -177,6 +191,7 @@ proxy_server_OBJECTS = \
 "CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o" \
 "CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o" \
 "CMakeFiles/proxy_server.dir/src/Logger.cpp.o" \
+"CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o" \
 "CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o" \
 "CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o"
 
@@ -188,11 +203,12 @@ proxy_server: CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o
 proxy_server: CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o
 proxy_server: CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o
 proxy_server: CMakeFiles/proxy_server.dir/src/Logger.cpp.o
+proxy_server: CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o
 proxy_server: CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o
 proxy_server: CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o
 proxy_server: CMakeFiles/proxy_server.dir/build.make
 proxy_server: CMakeFiles/proxy_server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable proxy_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable proxy_server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/proxy_server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

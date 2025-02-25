@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o.d"
   "CMakeFiles/proxy_server.dir/src/Logger.cpp.o"
   "CMakeFiles/proxy_server.dir/src/Logger.cpp.o.d"
+  "CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o"
+  "CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o.d"
   "CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o"
   "CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o.d"
   "CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o"

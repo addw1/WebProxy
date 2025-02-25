@@ -25,7 +25,20 @@ add_executable(proxy_server src/main.cpp ${SOURCES})
 target_include_directories(proxy_server PRIVATE src)
 target_link_libraries(proxy_server pthread)
 
+# Add OpenSSL with proper path for macOS
+find_package(OpenSSL REQUIRED)
+if(APPLE)
+    set(OPENSSL_ROOT_DIR /usr/local/opt/openssl@3)  # or /opt/homebrew/opt/openssl@3 for Apple Silicon
+    set(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
+    set(OPENSSL_CRYPTO_LIBRARY ${OPENSSL_ROOT_DIR}/lib/libcrypto.dylib)
+    set(OPENSSL_SSL_LIBRARY ${OPENSSL_ROOT_DIR}/lib/libssl.dylib)
+endif()
+
 # Create client test executable
 add_executable(client_test test/client_test.cpp)
 target_include_directories(client_test PRIVATE src)
-target_link_libraries(client_test pthread) 
+target_link_libraries(client_test 
+    pthread 
+    OpenSSL::SSL 
+    OpenSSL::Crypto
+) 

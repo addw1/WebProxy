@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp" "CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o.d"
   "/Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp" "CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o.d"
   "/Users/ning/Documents/Github/WebProxy/src/Logger.cpp" "CMakeFiles/proxy_server.dir/src/Logger.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/Logger.cpp.o.d"
+  "/Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp" "CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o.d"
   "/Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp" "CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o.d"
   "/Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp" "CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o.d"
   "/Users/ning/Documents/Github/WebProxy/src/main.cpp" "CMakeFiles/proxy_server.dir/src/main.cpp.o" "gcc" "CMakeFiles/proxy_server.dir/src/main.cpp.o.d"

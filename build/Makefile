@@ -238,6 +238,30 @@ src/Logger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/proxy_server.dir/build.make CMakeFiles/proxy_server.dir/src/Logger.cpp.s
 .PHONY : src/Logger.cpp.s
 
+src/MessageForwarder.o: src/MessageForwarder.cpp.o
+.PHONY : src/MessageForwarder.o
+
+# target to build an object file
+src/MessageForwarder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/proxy_server.dir/build.make CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o
+.PHONY : src/MessageForwarder.cpp.o
+
+src/MessageForwarder.i: src/MessageForwarder.cpp.i
+.PHONY : src/MessageForwarder.i
+
+# target to preprocess a source file
+src/MessageForwarder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/proxy_server.dir/build.make CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i
+.PHONY : src/MessageForwarder.cpp.i
+
+src/MessageForwarder.s: src/MessageForwarder.cpp.s
+.PHONY : src/MessageForwarder.s
+
+# target to generate assembly for a file
+src/MessageForwarder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/proxy_server.dir/build.make CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s
+.PHONY : src/MessageForwarder.cpp.s
+
 src/ProxyServer.o: src/ProxyServer.cpp.o
 .PHONY : src/ProxyServer.o
 
@@ -356,6 +380,9 @@ help:
 	@echo "... src/Logger.o"
 	@echo "... src/Logger.i"
 	@echo "... src/Logger.s"
+	@echo "... src/MessageForwarder.o"
+	@echo "... src/MessageForwarder.i"
+	@echo "... src/MessageForwarder.s"
 	@echo "... src/ProxyServer.o"
 	@echo "... src/ProxyServer.i"
 	@echo "... src/ProxyServer.s"
