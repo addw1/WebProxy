@@ -1,5 +1,6 @@
 #include "HttpParser.h"
 #include <sstream>
+#include <iostream>
 
 HttpParser::HttpParser() {}
 
@@ -11,16 +12,27 @@ HttpRequest HttpParser::parseRequest(const std::string& rawRequest) {
 
     // Parse request line
     std::getline(stream, line);
+    if (!line.empty() && line.back() == '\r') {
+        line.pop_back();
+    }
+    request.request = line;
     std::istringstream requestLine(line);
     requestLine >> request.method >> request.url >> request.version;
+    if (!request.version.empty() && request.version.back() == '\r') {
+        request.version.pop_back();
+    }
 
     // Parse headers
     while (std::getline(stream, line) && line != "\r" && line != "") {
         // Format key : value
         size_t colonPos = line.find(':');
         if (colonPos != std::string::npos) {
+            // Substr(startPoint, length)
             std::string key = line.substr(0, colonPos);
             std::string value = line.substr(colonPos + 2);
+            if (!value.empty() && value.back() == '\r') {
+                value.pop_back();
+            }
             request.headers[key] = value;
         }
     }

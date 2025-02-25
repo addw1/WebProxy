@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <mutex>
+#include <string>
 
 class Logger {
 private:
@@ -21,5 +22,5 @@ public:
     ~Logger();
     
     void log(LogLevel level, const std::string& message);
-    void setLogPath(const std::string& path);
+    void log(const std::string& message, int clientId);
 }; 

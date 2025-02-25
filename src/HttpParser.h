@@ -4,6 +4,7 @@
 
 struct HttpRequest {
     std::string method;
+    std::string request;
     std::string url;
     std::string version;
     std::unordered_map<std::string, std::string> headers;

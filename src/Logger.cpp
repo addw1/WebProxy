@@ -30,21 +30,17 @@ void Logger::log(LogLevel level, const std::string& message) {
         default: levelStr = "UNKNOWN";
     }
     
-    logFile << std::put_time(&tm, "%Y-%m-%d %H:%M:%S") 
-            << " [" << levelStr << "] " 
-            << message << std::endl;
+    logFile << "No clientID"
+            << ": [" << levelStr << "] " 
+            << message << std::put_time(&tm, "%Y-%m-%d %H:%M:%S") <<std::endl;
 }
 
-void Logger::setLogPath(const std::string& path) {
+void Logger::log(const std::string& message, int clientId) {
     std::lock_guard<std::mutex> lock(logMutex);
+    auto now = std::time(nullptr);
+    auto tm = *std::localtime(&now);
     
-    if (logFile.is_open()) {
-        logFile.close();
-    }
-    
-    logPath = path;
-    logFile.open(logPath, std::ios::app);
-    if (!logFile.is_open()) {
-        throw std::runtime_error("Failed to open new log file: " + logPath);
-    }
-} 
+    logFile << clientId << ": "
+            << message << " " << std::put_time(&tm, "%Y-%m-%d %H:%M:%S") << std::endl;
+}
+

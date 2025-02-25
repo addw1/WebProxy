@@ -76,15 +76,15 @@ CMakeFiles/client_test.dir/test/client_test.cpp.o: CMakeFiles/client_test.dir/fl
 CMakeFiles/client_test.dir/test/client_test.cpp.o: /Users/ning/Documents/Github/WebProxy/test/client_test.cpp
 CMakeFiles/client_test.dir/test/client_test.cpp.o: CMakeFiles/client_test.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/client_test.dir/test/client_test.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client_test.dir/test/client_test.cpp.o -MF CMakeFiles/client_test.dir/test/client_test.cpp.o.d -o CMakeFiles/client_test.dir/test/client_test.cpp.o -c /Users/ning/Documents/Github/WebProxy/test/client_test.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client_test.dir/test/client_test.cpp.o -MF CMakeFiles/client_test.dir/test/client_test.cpp.o.d -o CMakeFiles/client_test.dir/test/client_test.cpp.o -c /Users/ning/Documents/Github/WebProxy/test/client_test.cpp
 
 CMakeFiles/client_test.dir/test/client_test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client_test.dir/test/client_test.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/test/client_test.cpp > CMakeFiles/client_test.dir/test/client_test.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/test/client_test.cpp > CMakeFiles/client_test.dir/test/client_test.cpp.i
 
 CMakeFiles/client_test.dir/test/client_test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client_test.dir/test/client_test.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/test/client_test.cpp -o CMakeFiles/client_test.dir/test/client_test.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/test/client_test.cpp -o CMakeFiles/client_test.dir/test/client_test.cpp.s
 
 # Object files for target client_test
 client_test_OBJECTS = \

@@ -45,7 +45,6 @@ void ProxyServer::stop() {
     if (!running) {
         return;
     }
-    
     running = false;
     logger->log(Logger::INFO, "Stopping proxy server");
     connectionHandler->stop();

@@ -7,11 +7,12 @@
 
 class ConnectionHandler {
 private:
-    int serverSocket;
     // store all clients' threads
     std::vector<std::thread> clientThreads;
     std::shared_ptr<RequestHandler> requestHandler;
     std::shared_ptr<Logger> logger;
+    int serverSocket;
+    int id;
 
 public:
     ConnectionHandler(std::shared_ptr<RequestHandler> handler, std::shared_ptr<Logger> logger);
@@ -19,5 +20,5 @@ public:
 
     void start(int port);
     void stop();
-    void handleClient(int clientSocket);
+    void handleClient(int clientSocket, int clientId);
 }; 

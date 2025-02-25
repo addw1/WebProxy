@@ -76,113 +76,113 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: CMakeFiles/proxy_server.dir/flags.ma
 CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProxy/src/main.cpp
 CMakeFiles/proxy_server.dir/src/main.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/proxy_server.dir/src/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/main.cpp.o -MF CMakeFiles/proxy_server.dir/src/main.cpp.o.d -o CMakeFiles/proxy_server.dir/src/main.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/main.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/main.cpp.o -MF CMakeFiles/proxy_server.dir/src/main.cpp.o.d -o CMakeFiles/proxy_server.dir/src/main.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/main.cpp
 
 CMakeFiles/proxy_server.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/main.cpp > CMakeFiles/proxy_server.dir/src/main.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/main.cpp > CMakeFiles/proxy_server.dir/src/main.cpp.i
 
 CMakeFiles/proxy_server.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/main.cpp -o CMakeFiles/proxy_server.dir/src/main.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/main.cpp -o CMakeFiles/proxy_server.dir/src/main.cpp.s
 
 CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o: /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp
 CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o -MF CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o.d -o CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o -MF CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o.d -o CMakeFiles/proxy_server.dir/src/CacheManager.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp
 
 CMakeFiles/proxy_server.dir/src/CacheManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/CacheManager.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp > CMakeFiles/proxy_server.dir/src/CacheManager.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp > CMakeFiles/proxy_server.dir/src/CacheManager.cpp.i
 
 CMakeFiles/proxy_server.dir/src/CacheManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/CacheManager.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp -o CMakeFiles/proxy_server.dir/src/CacheManager.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/CacheManager.cpp -o CMakeFiles/proxy_server.dir/src/CacheManager.cpp.s
 
 CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o: /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp
 CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o -MF CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o.d -o CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o -MF CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o.d -o CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp
 
 CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp > CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp > CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.i
 
 CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp -o CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/ConnectionHandler.cpp -o CMakeFiles/proxy_server.dir/src/ConnectionHandler.cpp.s
 
 CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o: /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp
 CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o -MF CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o.d -o CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o -MF CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o.d -o CMakeFiles/proxy_server.dir/src/HttpParser.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp
 
 CMakeFiles/proxy_server.dir/src/HttpParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/HttpParser.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp > CMakeFiles/proxy_server.dir/src/HttpParser.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp > CMakeFiles/proxy_server.dir/src/HttpParser.cpp.i
 
 CMakeFiles/proxy_server.dir/src/HttpParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/HttpParser.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp -o CMakeFiles/proxy_server.dir/src/HttpParser.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/HttpParser.cpp -o CMakeFiles/proxy_server.dir/src/HttpParser.cpp.s
 
 CMakeFiles/proxy_server.dir/src/Logger.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/Logger.cpp.o: /Users/ning/Documents/Github/WebProxy/src/Logger.cpp
 CMakeFiles/proxy_server.dir/src/Logger.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/proxy_server.dir/src/Logger.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/Logger.cpp.o -MF CMakeFiles/proxy_server.dir/src/Logger.cpp.o.d -o CMakeFiles/proxy_server.dir/src/Logger.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/Logger.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/Logger.cpp.o -MF CMakeFiles/proxy_server.dir/src/Logger.cpp.o.d -o CMakeFiles/proxy_server.dir/src/Logger.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/Logger.cpp
 
 CMakeFiles/proxy_server.dir/src/Logger.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/Logger.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/Logger.cpp > CMakeFiles/proxy_server.dir/src/Logger.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/Logger.cpp > CMakeFiles/proxy_server.dir/src/Logger.cpp.i
 
 CMakeFiles/proxy_server.dir/src/Logger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/Logger.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/Logger.cpp -o CMakeFiles/proxy_server.dir/src/Logger.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/Logger.cpp -o CMakeFiles/proxy_server.dir/src/Logger.cpp.s
 
 CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp
 CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o -MF CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o.d -o CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o -MF CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o.d -o CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp
 
 CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp > CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp > CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.i
 
 CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp -o CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.cpp -o CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.s
 
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o -MF CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o.d -o CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o -MF CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o.d -o CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp
 
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp > CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp > CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.i
 
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp -o CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp -o CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.s
 
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: CMakeFiles/proxy_server.dir/flags.make
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: CMakeFiles/proxy_server.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ning/Documents/Github/WebProxy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o -MF CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o.d -o CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o -MF CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o.d -o CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o -c /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp
 
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp > CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp > CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.i
 
 CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp -o CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ning/Documents/Github/WebProxy/src/RequestHandler.cpp -o CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.s
 
 # Object files for target proxy_server
 proxy_server_OBJECTS = \
