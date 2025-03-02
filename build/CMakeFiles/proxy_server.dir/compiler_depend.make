@@ -4111,6 +4111,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__charconv/traits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__chrono/convert_to_timespec.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__chrono/duration.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__chrono/file_clock.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__chrono/high_resolution_clock.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__chrono/statically_widen.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__chrono/steady_clock.h \
@@ -4161,6 +4162,22 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__exception/nested_exception.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__exception/operations.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__exception/terminate.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/copy_options.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/directory_entry.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/directory_options.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_status.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_time_type.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/file_type.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/operations.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/path.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perm_options.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/perms.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/space_info.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__filesystem/u8path.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__format/buffer.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__format/concepts.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__format/container_adaptor.h \
@@ -4371,6 +4388,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__thread/id.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__thread/poll_with_backoff.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__threading_support \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tree \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/make_tuple_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/pair_like.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/sfinae_helpers.h \
@@ -4569,9 +4587,12 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/errno.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/exception \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/execution \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/format \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iostream \
@@ -4580,6 +4601,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/limits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/memory \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/mutex \
@@ -4589,6 +4611,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/stddef.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/stdexcept \
@@ -4612,6 +4635,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/fcntl.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/gethostuuid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/libkern/arm/_OSByteOrder.h \
@@ -4677,6 +4701,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fd_set.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fd_setsize.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fd_zero.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_filesec_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_gid_t.h \
@@ -4697,11 +4722,14 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_mode_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_nlink_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_null.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_o_dsync.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_o_sync.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_off_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_pid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_posix_vdisable.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_rsize_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_rune_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_s_ifmt.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_sa_family_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_seek_set.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_sigaltstack.h \
@@ -4732,6 +4760,7 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/cdefs.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/constrained_ctypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/fcntl.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/qos.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/resource.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/select.h \
@@ -4775,7 +4804,9 @@ CMakeFiles/proxy_server.dir/src/MessageForwarder.cpp.o: /Users/ning/Documents/Gi
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
   /Users/ning/Documents/Github/WebProxy/src/HttpParser.h \
-  /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.h
+  /Users/ning/Documents/Github/WebProxy/src/Logger.h \
+  /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.h \
+  /Users/ning/Documents/Github/WebProxy/src/Response.hpp
 
 CMakeFiles/proxy_server.dir/src/ProxyServer.cpp.o: /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/Availability.h \
@@ -6395,6 +6426,7 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__thread/id.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__thread/poll_with_backoff.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__threading_support \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tree \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/make_tuple_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/pair_like.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tuple/sfinae_helpers.h \
@@ -6607,6 +6639,7 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/limits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/memory \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/mutex \
@@ -6640,6 +6673,7 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/fcntl.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/gethostuuid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/libkern/arm/_OSByteOrder.h \
@@ -6705,6 +6739,7 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fd_set.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fd_setsize.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fd_zero.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_filesec_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_gid_t.h \
@@ -6725,11 +6760,14 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_mode_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_nlink_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_null.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_o_dsync.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_o_sync.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_off_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_pid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_posix_vdisable.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_rsize_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_rune_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_s_ifmt.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_sa_family_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_seek_set.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_sigaltstack.h \
@@ -6760,6 +6798,7 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/cdefs.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/constrained_ctypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/fcntl.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/qos.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/resource.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/select.h \
@@ -6806,7 +6845,8 @@ CMakeFiles/proxy_server.dir/src/RequestHandler.cpp.o: /Users/ning/Documents/Gith
   /Users/ning/Documents/Github/WebProxy/src/HttpParser.h \
   /Users/ning/Documents/Github/WebProxy/src/Logger.h \
   /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.h \
-  /Users/ning/Documents/Github/WebProxy/src/RequestHandler.h
+  /Users/ning/Documents/Github/WebProxy/src/RequestHandler.h \
+  /Users/ning/Documents/Github/WebProxy/src/Response.hpp
 
 CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProxy/src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/Availability.h \
@@ -7825,7 +7865,15 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProx
 
 /Users/ning/Documents/Github/WebProxy/src/ProxyServer.cpp:
 
+/Users/ning/Documents/Github/WebProxy/src/Response.hpp:
+
 /Users/ning/Documents/Github/WebProxy/src/MessageForwarder.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_o_sync.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_filesec_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/map:
 
 /Users/ning/Documents/Github/WebProxy/src/Logger.cpp:
 
@@ -7902,6 +7950,8 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProx
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/functional:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/fstream:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_o_dsync.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/_string.h:
 
@@ -9121,6 +9171,8 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProx
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_null.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_s_ifmt.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__math/logarithms.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/arm/_mcontext.h:
@@ -9345,6 +9397,8 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProx
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__concepts/copyable.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/fcntl.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__type_traits/add_pointer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/ranges_partition_copy.h:
@@ -9398,6 +9452,8 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProx
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/pstl_replace.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/ranges_equal.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__tree:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_ptrdiff_t.h:
 
@@ -9684,6 +9740,8 @@ CMakeFiles/proxy_server.dir/src/main.cpp.o: /Users/ning/Documents/Github/WebProx
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__type_traits/is_union.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__ranges/view_interface.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/sys/fcntl.h:
 
 /Users/ning/Documents/Github/WebProxy/src/Logger.h:
 
