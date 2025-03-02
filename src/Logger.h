@@ -23,4 +23,5 @@ public:
     
     void log(LogLevel level, const std::string& message);
     void log(const std::string& message, int clientId);
+    void log(LogLevel level, const std::string& message, int clientId);
 }; 

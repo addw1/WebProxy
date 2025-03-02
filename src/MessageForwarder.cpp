@@ -9,10 +9,11 @@
 void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int clientId, std::shared_ptr<Logger> logger) {
     // Log the request before forwarding
     logger->log("Requesting \"" + req.request + " from " + req.host, clientId);
+
     // Connect to the target server
     int serverSocket = connectToServer(req.host, req.port);
     if (serverSocket < 0) {
-        logger->log(Logger::LogLevel::ERROR, "Failed to connect to server: " + req.host + ":" + req.port);
+        logger->log(Logger::LogLevel::ERROR, "Failed to connect to server: " + req.host + ":" + req.port, clientId);
         sendErrorResponse(clientSocket, 502, "Bad Gateway");
         return;
     }
@@ -20,7 +21,7 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     // Forward the request to the server
     std::string requestToSend = buildForwardRequest(req);
     if (send(serverSocket, requestToSend.c_str(), requestToSend.length(), 0) < 0) {
-        logger->log(Logger::LogLevel::ERROR, "Failed to send request to server");
+        logger->log(Logger::LogLevel::ERROR, "Failed to send request to server", clientId);
         close(serverSocket);
         sendErrorResponse(clientSocket, 500, "Internal Server Error");
         return;
@@ -48,9 +49,9 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     
     // Read and process the response
     while ((bytesRead = recv(serverSocket, buffer, BUFFER_SIZE - 1, 0)) > 0) {
-        buffer[bytesRead] = '\0';  // Null-terminate for string operations
+        buffer[bytesRead] = '\0';  
         
-        // If we haven't finished reading headers yet
+        //If Proxy haven't finished reading headers
         if (!headersComplete) {
             responseHeaders.append(buffer, bytesRead);
             
@@ -59,7 +60,7 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
             if (headerEnd != std::string::npos) {
                 headersComplete = true;
                 
-                // Extract headers to check for keep-alive and content length
+                // Extract headers
                 std::string headerSection = responseHeaders.substr(0, headerEnd);
                 
                 // Check if server supports keep-alive
@@ -67,7 +68,7 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
                     keepAliveServer = true;
                 }
                 
-                // Check for Content-Length
+                // Read the content length
                 size_t contentLengthPos = headerSection.find("Content-Length: ");
                 if (contentLengthPos != std::string::npos) {
                     size_t valueStart = contentLengthPos + 16; // Length of "Content-Length: "
@@ -81,31 +82,32 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
                     chunkedEncoding = true;
                 }
                 
-                // Calculate how much of the body we've already received
-                receivedBodyBytes = responseHeaders.length() - (headerEnd + 4); // +4 for \r\n\r\n
+                // Calculate how much of the body the proxy have already received
+                // + 4 for \r\n\r\n
+                receivedBodyBytes = responseHeaders.length() - (headerEnd + 4);
                 
-                // Send the complete headers and any part of the body we've received to the client
+                // Send the complete headers and any part of the body that proxy received to the client
                 if (send(clientSocket, responseHeaders.c_str(), responseHeaders.length(), 0) < 0) {
-                    // logger->log(LogLevel::ERROR, "Failed to send response headers to client");
+                    logger->log(Logger::LogLevel::ERROR, "Failed to send response headers to client", clientId);
                     break;
                 }
                 
-                // If there's no body or we've already received the complete body
+                // If proxy already received all data, exit the loop
                 if ((contentLength > 0 && receivedBodyBytes >= contentLength) || 
                     (contentLength == 0 && !chunkedEncoding)) {
                     break;
                 }
             }
         } else {
-            // We've already sent the headers, now just forward the body data directly
+            // send the body to the client
             if (send(clientSocket, buffer, bytesRead, 0) < 0) {
-                // logger->log(LogLevel::ERROR, "Failed to send response body to client");
+                logger->log(Logger::LogLevel::ERROR, "Failed to send response body to client", clientId);
                 break;
             }
             
             receivedBodyBytes += bytesRead;
             
-            // If we know the content length and we've received all data, exit the loop
+            // Client received all data, exit the loop
             if (contentLength > 0 && receivedBodyBytes >= contentLength) {
                 break;
             }
@@ -122,21 +124,23 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     
     //Handle read errors or connection closed by server
     if (bytesRead < 0) {
-        logger->log(Logger::LogLevel::ERROR, "Error reading response from server: " + std::string(strerror(errno)));
+        logger->log(Logger::LogLevel::ERROR, "Error reading response from server: " + std::string(strerror(errno)), clientId);
     }
     
     //Close the server connection if keep-alive is not supported/requested
     if (!keepAliveServer) {
         close(serverSocket);
     } else {
-        // Store the connection for future use
+        //Store the connection for future use
         saveKeepAliveConnection(req.host, req.port, serverSocket);
     }
     
-    logger->log(Logger::LogLevel::INFO, "Completed forwarding GET request for client " + std::to_string(clientId));
+    logger->log(Logger::LogLevel::INFO, "Completed forwarding GET request for client " + std::to_string(clientId), clientId);
 }
 
-// Helper function to build the forwarded request
+/*
+@biref: Helper function to build the forwarded request
+*/
 std::string MessageForwarder::buildForwardRequest(const HttpRequest& req) {
     std::stringstream ss;
     
@@ -146,6 +150,8 @@ std::string MessageForwarder::buildForwardRequest(const HttpRequest& req) {
     // Add headers
     for (const auto& header : req.headers) {
         // Skip hop-by-hop headers
+        /*
+        */
         if (strcasecmp(header.first.c_str(), "Connection") == 0 ||
             strcasecmp(header.first.c_str(), "Keep-Alive") == 0 ||
             strcasecmp(header.first.c_str(), "Proxy-Connection") == 0 ||
@@ -159,7 +165,7 @@ std::string MessageForwarder::buildForwardRequest(const HttpRequest& req) {
         ss << header.first << ": " << header.second << "\r\n";
     }
     
-    // Add our own Connection header if needed
+    // Web proxy <---> target server (Always Keep-alive)
     ss << "Connection: keep-alive\r\n";
     
     // End of headers
@@ -278,9 +284,12 @@ int MessageForwarder::getKeepAliveConnection(const std::string& host, const std:
     }
     return -1;
 }
-
+/*
+  @biref: Helper function to save a keep-alive connection
+*/
 void MessageForwarder::saveKeepAliveConnection(const std::string& host, const std::string& port, int socket) {
     std::string key = host + ":" + port;
+    // Thrad safe
     std::lock_guard<std::mutex> guard(keepAliveMutex);
     
     // If there was an old connection, close it first
@@ -497,12 +506,12 @@ void MessageForwarder::forwardPost(HttpRequest& req, int clientSocket, int clien
 }
     
 void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int clientId, std::shared_ptr<Logger> logger) {
-    logger->log(Logger::INFO, "Handling CONNECT request for client " + std::to_string(clientId) + ": " + req.host + ":" + req.port);
+    logger->log(Logger::INFO, "Handling CONNECT request for client " + std::to_string(clientId) + ": " + req.host + ":" + req.port, clientId);
     
     //Connect to the target server
     int serverSocket = connectToServer(req.host, req.port);
     if (serverSocket < 0) {
-        logger->log(Logger::ERROR, "Failed to connect to server: " + req.host + ":" + req.port);
+        logger->log(Logger::ERROR, "Failed to connect to server: " + req.host + ":" + req.port, clientId);
         sendErrorResponse(clientSocket, 502, "Bad Gateway");
         return;
     }
@@ -513,7 +522,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
     response += "\r\n";
     
     if (send(clientSocket, response.c_str(), response.length(), 0) < 0) {
-        logger->log(Logger::ERROR, "Failed to send Connection Established response to client");
+        logger->log(Logger::ERROR, "Failed to send Connection Established response to client", clientId);
         close(serverSocket);
         return;
     }
@@ -529,7 +538,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
     fcntl(clientSocket, F_SETFL, clientFlags | O_NONBLOCK);
     fcntl(serverSocket, F_SETFL, serverFlags | O_NONBLOCK);
     
-    logger->log(Logger::LogLevel::INFO, "Established tunnel for client " + std::to_string(clientId) + " to " + req.host + ":" + req.port);
+    logger->log(Logger::LogLevel::INFO, "Established tunnel for client " + std::to_string(clientId) + " to " + req.host + ":" + req.port, clientId);
     
     // Tunnel Loop
     while (tunnelActive) {
@@ -548,14 +557,13 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
             if (errno == EINTR) {
                 continue;
             }
-            logger->log(Logger::LogLevel::ERROR, "Select error in tunnel: " + std::string(strerror(errno)));
+            logger->log(Logger::LogLevel::ERROR, "Select error in tunnel: " + std::string(strerror(errno)), clientId);
             break;
         }
         
         if (activity == 0) {
-            logger->log(Logger::LogLevel::DEBUG, "Tunnel timeout for client " + std::to_string(clientId) + ", checking connection");
-            // Send a TCP keep-alive packet (optional, depends on implementation)
-            // If no activity for this long, we could just close the tunnel
+            logger->log(Logger::LogLevel::DEBUG, "Tunnel timeout for client " + std::to_string(clientId) + ", checking connection", clientId);
+            //TODO: test here
             continue;
         }
         
@@ -569,8 +577,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
                     // Non-blocking operation would block, try again later
                     continue;
                 }
-                
-                logger->log(Logger::LogLevel::INFO, "Client " + std::to_string(clientId) + " closed connection or error occurred");
+                logger->log(Logger::LogLevel::INFO, "Client " + std::to_string(clientId) + " closed connection or error occurred", clientId);
                 tunnelActive = false;
                 break;
             }
@@ -584,12 +591,11 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
                 
                 if (bytesSent <= 0) {
                     if (bytesSent < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
-                        // Would block, try again with select
                         fd_set writeFds;
                         FD_ZERO(&writeFds);
                         FD_SET(serverSocket, &writeFds);
                         
-                        timeout.tv_sec = 5;  // 5 seconds timeout for write
+                        timeout.tv_sec = 5; 
                         timeout.tv_usec = 0;
                         
                         if (select(serverSocket + 1, NULL, &writeFds, NULL, &timeout) <= 0) {
@@ -601,7 +607,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
                     }
                     
                     // Error occurred
-                    logger->log(Logger::LogLevel::ERROR, "Error sending data to server: " + std::string(strerror(errno)));
+                    logger->log(Logger::LogLevel::ERROR, "Error sending data to server: " + std::string(strerror(errno)), clientId);
                     tunnelActive = false;
                     break;
                 }
@@ -639,7 +645,6 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
                 
                 if (bytesSent <= 0) {
                     if (bytesSent < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
-                        // Would block, try again with select
                         fd_set writeFds;
                         FD_ZERO(&writeFds);
                         FD_SET(clientSocket, &writeFds);
@@ -672,8 +677,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
     
     // Clean up
     close(serverSocket);
-    logger->log(Logger::LogLevel::INFO, "Closed tunnel for client " + std::to_string(clientId) + " to " + req.host + ":" + req.port);
+    logger->log(Logger::LogLevel::INFO, "Closed tunnel for client " + std::to_string(clientId) + " to " + req.host + ":" + req.port, clientId);
     
-    // Note: The client socket is not closed here as it's managed by the caller
 }
 
