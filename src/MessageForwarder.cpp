@@ -9,7 +9,34 @@
 void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int clientId, std::shared_ptr<Logger> logger) {
     // Log the request before forwarding
     logger->log("Requesting \"" + req.request + " from " + req.host, clientId);
-
+    
+    // Generate cache key
+    std::string cacheKey = generateCacheKey(req);
+    
+    // Check in the cache
+    auto cacheIt = responseCache.find(cacheKey);
+    bool fromCache = false;
+    bool revalidationNeeded = false;
+    if (cacheIt != responseCache.end()) {
+        // Check if cache entry is still valid
+        if (time(nullptr) < cacheIt->second.expiration && !cacheIt->second.mustRevalidate) {
+            // Get from cache
+            logger->log(Logger::LogLevel::INFO, "Serving response from cache for: " + req.host + req.request, clientId);
+            send(clientSocket, cacheIt->second.response.c_str(), cacheIt->second.response.length(), 0);
+            return;
+        } else if (!cacheIt->second.etag.empty() || !cacheIt->second.lastModified.empty()) {
+            // Need to revalidate(走协商缓存)
+            revalidationNeeded = true;
+            // Add validation headers to the request
+            if (!cacheIt->second.etag.empty()) {
+                req.headers["If-None-Match"] = cacheIt->second.etag;
+            }
+            if (!cacheIt->second.lastModified.empty()) {
+                req.headers["If-Modified-Since"] = cacheIt->second.lastModified;
+            }
+        }
+    }
+    
     // Connect to the target server
     int serverSocket = connectToServer(req.host, req.port);
     if (serverSocket < 0) {
@@ -42,6 +69,7 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     char buffer[BUFFER_SIZE];
     ssize_t bytesRead;
     std::string responseHeaders;
+    std::string fullResponse; // For caching
     bool headersComplete = false;
     size_t contentLength = 0;
     size_t receivedBodyBytes = 0;
@@ -49,9 +77,12 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     
     // Read and process the response
     while ((bytesRead = recv(serverSocket, buffer, BUFFER_SIZE - 1, 0)) > 0) {
-        buffer[bytesRead] = '\0';  
+        buffer[bytesRead] = '\0';
         
-        //If Proxy haven't finished reading headers
+        // Store the full response for potential caching
+        fullResponse.append(buffer, bytesRead);
+        
+        // If Proxy hasn't finished reading headers
         if (!headersComplete) {
             responseHeaders.append(buffer, bytesRead);
             
@@ -59,6 +90,20 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
             size_t headerEnd = responseHeaders.find("\r\n\r\n");
             if (headerEnd != std::string::npos) {
                 headersComplete = true;
+                
+                // Handle 304 Not Modified for cache revalidation
+                if (revalidationNeeded && responseHeaders.find("HTTP/1.1 304") != std::string::npos) {
+                    logger->log(Logger::LogLevel::INFO, "Revalidated cache - serving from cache", clientId);
+                    
+                    // Update expiration time
+                    CacheEntry& entry = responseCache[cacheKey];
+                    entry.expiration = getExpirationTime(responseHeaders);
+                    
+                    // Serve from cache
+                    send(clientSocket, entry.response.c_str(), entry.response.length(), 0);
+                    fromCache = true;
+                    break;
+                }
                 
                 // Extract headers
                 std::string headerSection = responseHeaders.substr(0, headerEnd);
@@ -82,24 +127,23 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
                     chunkedEncoding = true;
                 }
                 
-                // Calculate how much of the body the proxy have already received
-                // + 4 for \r\n\r\n
-                receivedBodyBytes = responseHeaders.length() - (headerEnd + 4);
+                // Calculate how much of the body we've already received
+                receivedBodyBytes = responseHeaders.length() - (headerEnd + 4); // +4 for \r\n\r\n
                 
-                // Send the complete headers and any part of the body that proxy received to the client
+                // Send the headers to the client
                 if (send(clientSocket, responseHeaders.c_str(), responseHeaders.length(), 0) < 0) {
                     logger->log(Logger::LogLevel::ERROR, "Failed to send response headers to client", clientId);
                     break;
                 }
                 
-                // If proxy already received all data, exit the loop
+                // If we already received all data, exit the loop
                 if ((contentLength > 0 && receivedBodyBytes >= contentLength) || 
                     (contentLength == 0 && !chunkedEncoding)) {
                     break;
                 }
             }
         } else {
-            // send the body to the client
+            // Send the body to the client
             if (send(clientSocket, buffer, bytesRead, 0) < 0) {
                 logger->log(Logger::LogLevel::ERROR, "Failed to send response body to client", clientId);
                 break;
@@ -107,7 +151,7 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
             
             receivedBodyBytes += bytesRead;
             
-            // Client received all data, exit the loop
+            // If we've received all data, exit the loop
             if (contentLength > 0 && receivedBodyBytes >= contentLength) {
                 break;
             }
@@ -122,20 +166,36 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
         }
     }
     
-    //Handle read errors or connection closed by server
+    // Handle read errors or connection closed by server
     if (bytesRead < 0) {
         logger->log(Logger::LogLevel::ERROR, "Error reading response from server: " + std::string(strerror(errno)), clientId);
     }
     
-    //Close the server connection if keep-alive is not supported/requested
+    // Handle caching if the response wasn't served from cache
+    if (!fromCache && headersComplete) {
+        if (isCacheable("GET", responseHeaders)) {
+            logger->log(Logger::LogLevel::INFO, "Caching response for: " + req.host + req.request, clientId);
+            
+            CacheEntry entry;
+            entry.response = fullResponse;
+            entry.expiration = getExpirationTime(responseHeaders);
+            entry.mustRevalidate = checkMustRevalidate(responseHeaders);
+            extractValidationHeaders(responseHeaders, entry.etag, entry.lastModified);
+            
+            responseCache[cacheKey] = entry;
+        }
+    }
+    
+    // Close the server connection if keep-alive is not supported/requested
     if (!keepAliveServer) {
         close(serverSocket);
     } else {
-        //Store the connection for future use
+        // Store the connection for future use
         saveKeepAliveConnection(req.host, req.port, serverSocket);
     }
     
     logger->log(Logger::LogLevel::INFO, "Completed forwarding GET request for client " + std::to_string(clientId), clientId);
+    
 }
 
 /*
@@ -681,3 +741,119 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
     
 }
 
+/****CACHE****/
+
+/*
+@biref: Generate cache key from request
+*/
+std::string MessageForwarder::generateCacheKey(const HttpRequest& req) {
+    return req.host + req.port + req.request;
+}
+
+
+
+/*
+@biref: Check if a response is cacheable
+*/
+bool MessageForwarder::isCacheable(const std::string& method, const std::string& responseHeaders) {
+    // Only cache GET responses
+    if (method != "GET") {
+        return false;
+    }
+    
+    // Don't cache if Cache-Control: no-store
+    if (responseHeaders.find("Cache-Control: no-store") != std::string::npos) {
+        return false;
+    }
+    
+    // Don't cache if private (for shared cache)
+    if (responseHeaders.find("Cache-Control: private") != std::string::npos) {
+        return false;
+    }
+    
+    // Other status code checks (only cache 200, 203, 300, 301, etc.)
+    std::string statusLine = responseHeaders.substr(0, responseHeaders.find("\r\n"));
+    if (statusLine.find(" 200 ") == std::string::npos && 
+        statusLine.find(" 203 ") == std::string::npos && 
+        statusLine.find(" 300 ") == std::string::npos && 
+        statusLine.find(" 301 ") == std::string::npos) {
+        return false;
+    }
+    return true;
+}
+
+/*
+@biref: Extract expiration time from headers
+*/
+time_t MessageForwarder::getExpirationTime(const std::string& responseHeaders) {
+    time_t expiresAt = time(nullptr) + 60; // Default: 60 seconds
+    
+    // Check for Cache-Control: max-age
+    size_t maxAgePos = responseHeaders.find("Cache-Control: max-age=");
+    if (maxAgePos != std::string::npos) {
+        size_t valueStart = maxAgePos + 22; // Length of "Cache-Control: max-age="
+        size_t valueEnd = responseHeaders.find("\r\n", valueStart);
+        if (valueEnd == std::string::npos) {
+            valueEnd = responseHeaders.find(",", valueStart);
+        }
+        if (valueEnd != std::string::npos) {
+            std::string maxAgeStr = responseHeaders.substr(valueStart, valueEnd - valueStart);
+            try {
+                int maxAge = std::stoi(maxAgeStr);
+                expiresAt = time(nullptr) + maxAge;
+            } catch (const std::exception& e) {
+                // Handle parsing error
+            }
+        }
+    } else {
+        // Check for Expires header if no max-age
+        size_t expiresPos = responseHeaders.find("Expires: ");
+        if (expiresPos != std::string::npos) {
+            size_t valueStart = expiresPos + 9; // Length of "Expires: "
+            size_t valueEnd = responseHeaders.find("\r\n", valueStart);
+            if (valueEnd != std::string::npos) {
+                std::string expiresStr = responseHeaders.substr(valueStart, valueEnd - valueStart);
+                struct tm tm = {};
+                // RFC 7231 date format: "Tue, 01 Jan 2019 00:00:00 GMT"
+                if (strptime(expiresStr.c_str(), "%a, %d %b %Y %H:%M:%S GMT", &tm) != nullptr) {
+                    expiresAt = mktime(&tm);
+                }
+            }
+        }
+    }
+    
+    return expiresAt;
+}
+
+
+/*
+    @brief: Extract cache validation headers
+*/
+void MessageForwarder::extractValidationHeaders(const std::string& responseHeaders, std::string& etag, std::string& lastModified) {
+    // Extract ETag
+    size_t etagPos = responseHeaders.find("ETag: ");
+    if (etagPos != std::string::npos) {
+        size_t valueStart = etagPos + 6; // Length of "ETag: "
+        size_t valueEnd = responseHeaders.find("\r\n", valueStart);
+        if (valueEnd != std::string::npos) {
+            etag = responseHeaders.substr(valueStart, valueEnd - valueStart);
+        }
+    }
+    
+    // Extract Last-Modified
+    size_t lastModifiedPos = responseHeaders.find("Last-Modified: ");
+    if (lastModifiedPos != std::string::npos) {
+        size_t valueStart = lastModifiedPos + 15; // Length of "Last-Modified: "
+        size_t valueEnd = responseHeaders.find("\r\n", valueStart);
+        if (valueEnd != std::string::npos) {
+            lastModified = responseHeaders.substr(valueStart, valueEnd - valueStart);
+        }
+    }
+}
+/*
+@biref: check whether need revalidate
+*/
+bool MessageForwarder::checkMustRevalidate(const std::string& responseHeaders) {
+    return responseHeaders.find("Cache-Control: must-revalidate") != std::string::npos ||
+           responseHeaders.find("Cache-Control: no-cache") != std::string::npos;
+}

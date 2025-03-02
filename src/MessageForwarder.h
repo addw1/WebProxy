@@ -18,4 +18,19 @@ private:
     std::map<std::string, int> keepAliveConnections;
     std::mutex keepAliveMutex;
     int connectToServer(const std::string& host, const std::string& port);
+
+    // for the Cache
+    struct CacheEntry {
+        std::string response;
+        std::string etag;
+        std::string lastModified;
+        time_t expiration;
+        bool mustRevalidate;
+    };
+    std::unordered_map<std::string, CacheEntry> responseCache;
+    std::string generateCacheKey(const HttpRequest& req);
+    bool isCacheable(const std::string& method, const std::string& responseHeaders);
+    time_t getExpirationTime(const std::string& responseHeaders);
+    void extractValidationHeaders(const std::string& responseHeaders, std::string& etag, std::string& lastModified);
+    bool checkMustRevalidate(const std::string& responseHeaders);
 };
