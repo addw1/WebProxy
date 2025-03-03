@@ -4,6 +4,7 @@
 #include "HttpParser.h"
 #include "CacheManager.h"
 #include "Logger.h"
+#include "MessageForwarder.h"
 
 class RequestHandler {
 private:
@@ -13,6 +14,6 @@ private:
 
 public:
     RequestHandler(std::shared_ptr<CacheManager> cache, std::shared_ptr<Logger> logger);
-    void handleRequest(const std::string& request, int clientSocket, int clientId);
-    void forwardRequest(HttpRequest httpRequest, int clientSocket, int clientId);
+    void handleRequest(const std::string& request, int clientSocket, int clientId, MessageForwarder& forwarder);
+    void forwardRequest(HttpRequest httpRequest, int clientSocket, int clientId, MessageForwarder& forwarder);
 }; 

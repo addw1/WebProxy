@@ -4,6 +4,7 @@
 #include <memory>
 #include "RequestHandler.h"
 #include "Logger.h"
+//#include "MessageForwarder.h"
 
 class ConnectionHandler {
 private:
@@ -20,5 +21,5 @@ public:
 
     void start(int port);
     void stop();
-    void handleClient(int clientSocket, int clientId);
+    void handleClient(int clientSocket, int clientId,  MessageForwarder& forwarder);
 }; 

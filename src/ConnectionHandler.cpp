@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <arpa/inet.h>
+//#include "MessageForwarder.h"
 
 
 ConnectionHandler::ConnectionHandler(std::shared_ptr<RequestHandler> handler, std::shared_ptr<Logger> logger)
@@ -38,7 +39,8 @@ void ConnectionHandler::start(int port) {
         logger->log(Logger::ERROR, "Failed to listen on socket");
         throw std::runtime_error("Failed to listen on socket");
     }
-
+    
+    MessageForwarder forwarder;
     while (true) {
         struct sockaddr_in clientAddr;
         socklen_t clientAddrLen = sizeof(clientAddr);
@@ -58,16 +60,16 @@ void ConnectionHandler::start(int port) {
         
         // Store the new request
         std::string ip = std::string(clientIP);
-        logger->log("from " + ip, id);
+        //logger->log("from " + ip, id);
         // Create a new thread and execute handleClient func
-        clientThreads.emplace_back(&ConnectionHandler::handleClient, this, clientSocket, id);
+        clientThreads.emplace_back(&ConnectionHandler::handleClient, this, clientSocket, id, std::ref(forwarder));
     } 
 }
 /**
  * @brief: Handle user request, and return response
  */
-void ConnectionHandler::handleClient(int clientSocket, int clientId){
-    const int BUFFER_SIZE = 4096;
+void ConnectionHandler::handleClient(int clientSocket, int clientId, MessageForwarder& forwarder) {
+    //const int BUFFER_SIZE = 4096;
     char buffer[BUFFER_SIZE];
     // Read the data
     ssize_t bytesRead = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0);
@@ -77,7 +79,7 @@ void ConnectionHandler::handleClient(int clientSocket, int clientId){
         // Convert the C style string to the C++ style
         std::string request(buffer);
         // Get the response 
-        requestHandler->handleRequest(request, clientSocket, clientId);
+        requestHandler->handleRequest(request, clientSocket, clientId, forwarder);
     }
     close(clientSocket);
 }

@@ -15,18 +15,36 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     
     // Check in the cache
     auto cacheIt = responseCache.find(cacheKey);
+    //
+    //logger->log("Finding Cache key: " + cacheKey, clientId);
+    // pritn every pair in the cache
+    //for (auto it = responseCache.begin(); it != responseCache.end(); ++it) {
+       // logger->log("Has Cache key: " + it->first, clientId);
+    //}
     bool fromCache = false;
     bool revalidationNeeded = false;
+    if (cacheIt == responseCache.end()){
+        // print to logfile: ID: not in cache
+        logger->log("not in cache", clientId); // wks
+    }
     if (cacheIt != responseCache.end()) {
         // Check if cache entry is still valid
         if (time(nullptr) < cacheIt->second.expiration && !cacheIt->second.mustRevalidate) {
             // Get from cache
-            logger->log(Logger::LogLevel::INFO, "Serving response from cache for: " + req.host + req.request, clientId);
+            // print to logfile: ID: in cache, valid
+            logger->log("in cache, valid", clientId); // wks
+            //logger->log(Logger::LogLevel::INFO, "Serving response from cache for: " + req.host + req.request, clientId);
             send(clientSocket, cacheIt->second.response.c_str(), cacheIt->second.response.length(), 0);
             return;
-        } else if (!cacheIt->second.etag.empty() || !cacheIt->second.lastModified.empty()) {
+        }
+        else if (time(nullptr) >= cacheIt->second.expiration) // wks
+        {
+            logger->log("in cache, but expired at " + std::to_string(cacheIt->second.expiration), clientId); // wks
+        }
+        else if (!cacheIt->second.etag.empty() || !cacheIt->second.lastModified.empty()) {
             // Need to revalidate(走协商缓存)
             revalidationNeeded = true;
+            logger->log("in cache, requires validation", clientId); // wks
             // Add validation headers to the request
             if (!cacheIt->second.etag.empty()) {
                 req.headers["If-None-Match"] = cacheIt->second.etag;
@@ -36,6 +54,8 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
             }
         }
     }
+    
+    //logger->log("Requesting \"" + req.request + "\" from " + req.host, clientId); // wks
     
     // Connect to the target server
     int serverSocket = connectToServer(req.host, req.port);
@@ -47,6 +67,9 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
     
     // Forward the request to the server
     std::string requestToSend = buildForwardRequest(req);
+    //logger->log("1111111", clientId);
+    //logger->log(Logger::LogLevel::INFO, requestToSend.c_str(), clientId);
+    
     if (send(serverSocket, requestToSend.c_str(), requestToSend.length(), 0) < 0) {
         logger->log(Logger::LogLevel::ERROR, "Failed to send request to server", clientId);
         close(serverSocket);
@@ -90,6 +113,8 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
             size_t headerEnd = responseHeaders.find("\r\n\r\n");
             if (headerEnd != std::string::npos) {
                 headersComplete = true;
+                std::string responseLine = responseHeaders.substr(0, responseHeaders.find("\r\n")); // wks
+                //logger->log(Logger::LogLevel::INFO, std::to_string(clientId) + ": Received \"" + responseLine + "\" from " + req.host, clientId); // wks
                 
                 // Handle 304 Not Modified for cache revalidation
                 if (revalidationNeeded && responseHeaders.find("HTTP/1.1 304") != std::string::npos) {
@@ -135,6 +160,9 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
                     logger->log(Logger::LogLevel::ERROR, "Failed to send response headers to client", clientId);
                     break;
                 }
+                size_t newlinePos = responseHeaders.find('\n');
+                std::string responseL = responseHeaders.substr(0, newlinePos);
+                logger->log("Responding \"" + responseL.substr(0, responseL.size()-1) + "\"", clientId);
                 
                 // If we already received all data, exit the loop
                 if ((contentLength > 0 && receivedBodyBytes >= contentLength) || 
@@ -166,15 +194,23 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
         }
     }
     
+
     // Handle read errors or connection closed by server
     if (bytesRead < 0) {
         logger->log(Logger::LogLevel::ERROR, "Error reading response from server: " + std::string(strerror(errno)), clientId);
     }
-    
+    //when it receives the response from the origin server, it should print: ID: Received"RESPONSE" fromSERVER
+    size_t newlinePos = fullResponse.find('\n');
+    std::string responseLine = fullResponse.substr(0, newlinePos);
+    logger->log("Received \"" + responseLine.substr(0, responseLine.size()-1) + "\" from " + req.host, clientId);
     // Handle caching if the response wasn't served from cache
+    
+    
     if (!fromCache && headersComplete) {
+        
         if (isCacheable("GET", responseHeaders)) {
-            logger->log(Logger::LogLevel::INFO, "Caching response for: " + req.host + req.request, clientId);
+            
+            //logger->log(Logger::LogLevel::INFO, "Caching response for: " + req.host + req.request, clientId);
             
             CacheEntry entry;
             entry.response = fullResponse;
@@ -182,7 +218,12 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
             entry.mustRevalidate = checkMustRevalidate(responseHeaders);
             extractValidationHeaders(responseHeaders, entry.etag, entry.lastModified);
             
-            responseCache[cacheKey] = entry;
+            // print cacheKey
+            //logger->log("Storing Cache key: " + generateCacheKey(req), clientId);
+            responseCache[generateCacheKey(req)] = entry;
+            //for (auto it = responseCache.begin(); it != responseCache.end(); ++it) {
+                //logger->log("Has Cache key: " + it->first, clientId);
+            //}
         }
     }
     
@@ -194,7 +235,7 @@ void MessageForwarder::forwardGet(HttpRequest& req, int clientSocket, int client
         saveKeepAliveConnection(req.host, req.port, serverSocket);
     }
     
-    logger->log(Logger::LogLevel::INFO, "Completed forwarding GET request for client " + std::to_string(clientId), clientId);
+    //logger->log(Logger::LogLevel::INFO, "Completed forwarding GET request for client " + std::to_string(clientId), clientId);
     
 }
 
@@ -205,28 +246,30 @@ std::string MessageForwarder::buildForwardRequest(const HttpRequest& req) {
     std::stringstream ss;
     
     // Build the request line
-    ss << req.method << " " << req.request << " " << req.version << "\r\n";
+    ss <<  req.request << "\r\n";
     
     // Add headers
     for (const auto& header : req.headers) {
         // Skip hop-by-hop headers
         /*
         */
-        if (strcasecmp(header.first.c_str(), "Connection") == 0 ||
-            strcasecmp(header.first.c_str(), "Keep-Alive") == 0 ||
-            strcasecmp(header.first.c_str(), "Proxy-Connection") == 0 ||
-            strcasecmp(header.first.c_str(), "Proxy-Authorization") == 0 ||
-            strcasecmp(header.first.c_str(), "TE") == 0 ||
-            strcasecmp(header.first.c_str(), "Trailer") == 0 ||
-            strcasecmp(header.first.c_str(), "Transfer-Encoding") == 0 ||
-            strcasecmp(header.first.c_str(), "Upgrade") == 0) {
+        if (strcasecmp(header.first.c_str(), "Connection") == 0){
             continue;
         }
+         //   strcasecmp(header.first.c_str(), "Keep-Alive") == 0 ||
+         //   strcasecmp(header.first.c_str(), "Proxy-Connection") == 0 ||
+         //   strcasecmp(header.first.c_str(), "Proxy-Authorization") == 0 ||
+         //   strcasecmp(header.first.c_str(), "TE") == 0 ||
+         //   strcasecmp(header.first.c_str(), "Trailer") == 0 ||
+          //  strcasecmp(header.first.c_str(), "Transfer-Encoding") == 0 ||
+          //  strcasecmp(header.first.c_str(), "Upgrade") == 0) {
+          //  continue;
+        //}
         ss << header.first << ": " << header.second << "\r\n";
     }
     
     // Web proxy <---> target server (Always Keep-alive)
-    ss << "Connection: keep-alive\r\n";
+    ss << "Connection: close\r\n";
     
     // End of headers
     ss << "\r\n";
@@ -268,7 +311,8 @@ std::string MessageForwarder::buildForwardRequest(const HttpRequest& req) {
         freeaddrinfo(res);
         return -1;
     }
-    
+    // set socket
+    //setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int));    
     // Non-blocking mode
     int flags = fcntl(sockfd, F_GETFL, 0);
     fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
@@ -369,7 +413,7 @@ void MessageForwarder::removeKeepAliveConnection(const std::string& host, const 
 }
 
 void MessageForwarder::forwardPost(HttpRequest& req, int clientSocket, int clientId, std::shared_ptr<Logger> logger) {
-    logger->log(Logger::LogLevel::INFO, "Forwarding POST request for client " + std::to_string(clientId) + ": " + req.url);
+    //logger->log(Logger::LogLevel::INFO, "Forwarding POST request for client " + std::to_string(clientId) + ": " + req.url);
     
     //Connect to the target server
     std::string port = req.port.empty() ? "80" : req.port;
@@ -426,7 +470,7 @@ void MessageForwarder::forwardPost(HttpRequest& req, int clientSocket, int clien
     }
     
     if (chunkedEncoding && req.body.find("0\r\n\r\n") == std::string::npos) {
-        logger->log(Logger::LogLevel::DEBUG, "Reading additional chunked data from client");
+        //logger->log(Logger::LogLevel::DEBUG, "Reading additional chunked data from client");
         
         char buffer[BUFFER_SIZE];
         bool chunkedComplete = false;
@@ -522,6 +566,10 @@ void MessageForwarder::forwardPost(HttpRequest& req, int clientSocket, int clien
                     logger->log(Logger::LogLevel::ERROR, "Failed to send response headers to client");
                     break;
                 }
+                //Whenever your proxy responds to the client, it should log: ID: Responding "RESPONSE"
+                size_t newlinePos = responseHeaders.find('\n');
+                std::string responseLine = responseHeaders.substr(0, newlinePos);
+                logger->log("Responding \"" + responseLine + "\"", clientId);
                 
                 if ((responseContentLength > 0 && receivedBodyBytes >= responseContentLength) || 
                     (responseContentLength == 0 && !responseChunked)) {
@@ -562,11 +610,11 @@ void MessageForwarder::forwardPost(HttpRequest& req, int clientSocket, int clien
         saveKeepAliveConnection(req.host, port, serverSocket);
     }
     
-    logger->log(Logger::LogLevel::INFO, "Completed forwarding POST request for client " + std::to_string(clientId));
+    //logger->log(Logger::LogLevel::INFO, "Completed forwarding POST request for client " + std::to_string(clientId));
 }
     
 void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int clientId, std::shared_ptr<Logger> logger) {
-    logger->log(Logger::INFO, "Handling CONNECT request for client " + std::to_string(clientId) + ": " + req.host + ":" + req.port, clientId);
+    //logger->log(Logger::INFO, "Handling CONNECT request for client " + std::to_string(clientId) + ": " + req.host + ":" + req.port, clientId);
     
     //Connect to the target server
     int serverSocket = connectToServer(req.host, req.port);
@@ -622,7 +670,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
         }
         
         if (activity == 0) {
-            logger->log(Logger::LogLevel::DEBUG, "Tunnel timeout for client " + std::to_string(clientId) + ", checking connection", clientId);
+            //logger->log(Logger::LogLevel::DEBUG, "Tunnel timeout for client " + std::to_string(clientId) + ", checking connection", clientId);
             //TODO: test here
             continue;
         }
@@ -737,7 +785,7 @@ void MessageForwarder::forwardConnect(HttpRequest& req, int clientSocket, int cl
     
     // Clean up
     close(serverSocket);
-    logger->log(Logger::LogLevel::INFO, "Closed tunnel for client " + std::to_string(clientId) + " to " + req.host + ":" + req.port, clientId);
+    logger->log("Tunnel closed", clientId);
     
 }
 
