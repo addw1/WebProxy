@@ -1,4 +1,0 @@
-/Users/john_wang/Desktop/proxy_v2/WebProxy/build/CMakeFiles/proxy_server.dir
-/Users/john_wang/Desktop/proxy_v2/WebProxy/build/CMakeFiles/client_test.dir
-/Users/john_wang/Desktop/proxy_v2/WebProxy/build/CMakeFiles/edit_cache.dir
-/Users/john_wang/Desktop/proxy_v2/WebProxy/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,115 @@
+No clientID: [INFO] Starting proxy server on port 123452025-03-03 21:59:04
+1: CONNECT gue1-dealer.g2.spotify.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:05 2025 2025-03-03 21:59:05
+1: [INFO] Established tunnel for client 1 to gue1-dealer.g2.spotify.com:4432025-03-03 21:59:05
+2: CONNECT alive.github.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:06 2025 2025-03-03 21:59:06
+2: [INFO] Established tunnel for client 2 to alive.github.com:4432025-03-03 21:59:06
+No clientID: [INFO] Server closed connection or error occurred2025-03-03 21:59:07
+2: Tunnel closed 2025-03-03 21:59:07
+3: CONNECT alive.github.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:07 2025 2025-03-03 21:59:07
+3: [INFO] Established tunnel for client 3 to alive.github.com:4432025-03-03 21:59:07
+4: CONNECT www.google.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:10 2025 2025-03-03 21:59:10
+4: [INFO] Established tunnel for client 4 to www.google.com:4432025-03-03 21:59:10
+5: POST http://o.pki.goog/we2 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:10 2025 2025-03-03 21:59:10
+4: [INFO] Client 4 closed connection or error occurred2025-03-03 21:59:11
+4: Tunnel closed 2025-03-03 21:59:11
+6: CONNECT baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:11 2025 2025-03-03 21:59:11
+6: [INFO] Established tunnel for client 6 to baidu.com:4432025-03-03 21:59:11
+7: POST http://ocsp.digicert.cn/ HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:12 2025 2025-03-03 21:59:12
+8: CONNECT www.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:14 2025 2025-03-03 21:59:14
+8: [INFO] Established tunnel for client 8 to www.baidu.com:4432025-03-03 21:59:14
+9: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:14 2025 2025-03-03 21:59:14
+11: CONNECT search-operate.cdn.bcebos.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+12: CONNECT hectorstatic.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+13: CONNECT pss.bdstatic.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+14: CONNECT mbd.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+15: CONNECT sp1.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+16: CONNECT sp1.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+17: CONNECT sp2.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:17 2025 2025-03-03 21:59:17
+12: [INFO] Established tunnel for client 12 to hectorstatic.baidu.com:4432025-03-03 21:59:17
+14: [INFO] Established tunnel for client 14 to mbd.baidu.com:4432025-03-03 21:59:17
+17: [INFO] Established tunnel for client 17 to sp2.baidu.com:4432025-03-03 21:59:17
+16: [INFO] Established tunnel for client 16 to sp1.baidu.com:4432025-03-03 21:59:17
+15: [INFO] Established tunnel for client 15 to sp1.baidu.com:4432025-03-03 21:59:18
+19: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:18 2025 2025-03-03 21:59:18
+20: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:18 2025 2025-03-03 21:59:18
+21: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:18 2025 2025-03-03 21:59:18
+22: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:18 2025 2025-03-03 21:59:18
+23: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:18 2025 2025-03-03 21:59:18
+13: [INFO] Established tunnel for client 13 to pss.bdstatic.com:4432025-03-03 21:59:18
+13: [INFO] Client 13 closed connection or error occurred2025-03-03 21:59:18
+13: Tunnel closed 2025-03-03 21:59:18
+11: [INFO] Established tunnel for client 11 to search-operate.cdn.bcebos.com:4432025-03-03 21:59:18
+24: POST http://ocsp.sectigochina.com/ HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:20 2025 2025-03-03 21:59:20
+26: CONNECT sp1.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:20 2025 2025-03-03 21:59:20
+25: CONNECT mbd.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:20 2025 2025-03-03 21:59:20
+25: [INFO] Established tunnel for client 25 to mbd.baidu.com:4432025-03-03 21:59:20
+26: [INFO] Established tunnel for client 26 to sp1.baidu.com:4432025-03-03 21:59:20
+28: CONNECT hector.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:20 2025 2025-03-03 21:59:20
+10: CONNECT pss.bdstatic.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:20 2025 2025-03-03 21:59:20
+10: [INFO] Established tunnel for client 10 to pss.bdstatic.com:4432025-03-03 21:59:20
+42: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+28: [INFO] Established tunnel for client 28 to hector.baidu.com:4432025-03-03 21:59:21
+43: POST http://ocsp.globalsign.com/gsrsaovsslca2018 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+10: [INFO] Client 10 closed connection or error occurred2025-03-03 21:59:21
+34: CONNECT t14.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+31: CONNECT gips1.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+35: CONNECT gimg4.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+41: CONNECT t8.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+39: CONNECT t8.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+36: CONNECT t15.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+40: CONNECT t7.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+10: Tunnel closed 2025-03-03 21:59:21
+32: CONNECT gimg3.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+37: CONNECT t13.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+30: CONNECT baidubox-emoji.cdn.bcebos.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+38: CONNECT t8.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+33: CONNECT t9.baidu.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:21 2025 2025-03-03 21:59:21
+37: [INFO] Established tunnel for client 37 to t13.baidu.com:4432025-03-03 21:59:21
+37: [INFO] Client 37 closed connection or error occurred2025-03-03 21:59:21
+37: Tunnel closed 2025-03-03 21:59:21
+31: [INFO] Established tunnel for client 31 to gips1.baidu.com:4432025-03-03 21:59:22
+31: [INFO] Client 31 closed connection or error occurred2025-03-03 21:59:22
+31: Tunnel closed 2025-03-03 21:59:22
+41: [INFO] Established tunnel for client 41 to t8.baidu.com:4432025-03-03 21:59:22
+41: [INFO] Client 41 closed connection or error occurred2025-03-03 21:59:22
+40: [INFO] Established tunnel for client 40 to t7.baidu.com:4432025-03-03 21:59:22
+40: [INFO] Client 40 closed connection or error occurred2025-03-03 21:59:22
+41: Tunnel closed 2025-03-03 21:59:22
+40: Tunnel closed 2025-03-03 21:59:22
+39: [INFO] Established tunnel for client 39 to t8.baidu.com:4432025-03-03 21:59:22
+39: [INFO] Client 39 closed connection or error occurred2025-03-03 21:59:22
+38: [INFO] Established tunnel for client 38 to t8.baidu.com:4432025-03-03 21:59:22
+38: [INFO] Client 38 closed connection or error occurred2025-03-03 21:59:22
+39: Tunnel closed 2025-03-03 21:59:22
+38: Tunnel closed 2025-03-03 21:59:22
+32: [INFO] Established tunnel for client 32 to gimg3.baidu.com:4432025-03-03 21:59:22
+32: [INFO] Client 32 closed connection or error occurred2025-03-03 21:59:22
+32: Tunnel closed 2025-03-03 21:59:22
+34: [INFO] Established tunnel for client 34 to t14.baidu.com:4432025-03-03 21:59:22
+34: [INFO] Client 34 closed connection or error occurred2025-03-03 21:59:22
+34: Tunnel closed 2025-03-03 21:59:22
+36: [INFO] Established tunnel for client 36 to t15.baidu.com:4432025-03-03 21:59:22
+36: [INFO] Client 36 closed connection or error occurred2025-03-03 21:59:22
+36: Tunnel closed 2025-03-03 21:59:22
+30: [INFO] Established tunnel for client 30 to baidubox-emoji.cdn.bcebos.com:4432025-03-03 21:59:22
+30: [INFO] Client 30 closed connection or error occurred2025-03-03 21:59:22
+30: Tunnel closed 2025-03-03 21:59:22
+35: [INFO] Established tunnel for client 35 to gimg4.baidu.com:4432025-03-03 21:59:22
+35: [INFO] Client 35 closed connection or error occurred2025-03-03 21:59:22
+35: Tunnel closed 2025-03-03 21:59:22
+33: [INFO] Established tunnel for client 33 to t9.baidu.com:4432025-03-03 21:59:22
+33: [INFO] Client 33 closed connection or error occurred2025-03-03 21:59:22
+33: Tunnel closed 2025-03-03 21:59:22
+28: [INFO] Client 28 closed connection or error occurred2025-03-03 21:59:22
+28: Tunnel closed 2025-03-03 21:59:22
+44: CONNECT incoming.telemetry.mozilla.org:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:22 2025 2025-03-03 21:59:22
+44: [INFO] Established tunnel for client 44 to incoming.telemetry.mozilla.org:4432025-03-03 21:59:22
+45: POST http://ocsp.digicert.com/ HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:22 2025 2025-03-03 21:59:22
+46: CONNECT wss-backup.slack.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:25 2025 2025-03-03 21:59:25
+46: [INFO] Established tunnel for client 46 to wss-backup.slack.com:4432025-03-03 21:59:25
+47: CONNECT gue1-dealer.g2.spotify.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:33 2025 2025-03-03 21:59:33
+47: [INFO] Established tunnel for client 47 to gue1-dealer.g2.spotify.com:4432025-03-03 21:59:33
+48: CONNECT wss-backup.slack.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:35 2025 2025-03-03 21:59:35
+48: [INFO] Established tunnel for client 48 to wss-backup.slack.com:4432025-03-03 21:59:35
+49: CONNECT wss-backup.slack.com:443 HTTP/1.1 from 172.19.0.1 @ Mon Mar 03 21:59:40 2025 2025-03-03 21:59:40
+49: [INFO] Established tunnel for client 49 to wss-backup.slack.com:4432025-03-03 21:59:40

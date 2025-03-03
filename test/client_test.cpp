@@ -36,28 +36,19 @@ public:
         std::string response;
         char buffer[4096];
         int bytesRead;
-
-        // The while loop continues as long as recv() returns > 0 bytes read
-        // If the server closes the connection normally, recv() will return 0
-        // If there's an error, recv() will return -1
-        // So we need to check for both cases to avoid infinite loop
         while ((bytesRead = recv(sock, buffer, sizeof(buffer) - 1, 0)) > 0) {
             buffer[bytesRead] = '\0';  // Null terminate the received data
             response += buffer;
             
-            // Check if we've received the end of the HTTP response
-            // Most HTTP responses end with \r\n\r\n
             if (response.find("\r\n\r\n") != std::string::npos) {
                 break;
             }
         }
 
         if (bytesRead == 0) {
-            // Connection closed by peer
             return response;
         }
         else if (bytesRead < 0) {
-            // Error occurred
             return "";
         }
 
